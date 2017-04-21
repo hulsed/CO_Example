@@ -10,7 +10,7 @@ x_com=z(3);
 %J1=(z1_res-z1).^2;
 %J2=(z2_res-z2).^2;
 
-J_ineq=[J1_res,J2_res];
+J_ineq=[J1_res,J2_res];%-[0.5,0.5]+
 
 J_eq=[xcom1_res-x_com,xcom2_res-x_com];
 
