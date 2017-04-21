@@ -1,0 +1,17 @@
+function z1_res=opt_ss1(z2_cop,z_sys)
+
+
+
+
+    function obj=objective(b1)
+
+        obj=ss1_obj(b1,z2_cop,z_sys)
+
+        
+    end
+
+    function 
+        
+    end
+
+end
