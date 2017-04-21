@@ -1,11 +1,11 @@
-function J2_res=opt_ss1(z1,z2, x_com)
+function [J2_res,xcom_res]=opt_ss1(z1,z2, x_com)
 
 func=@objective;
 con=@constraint;
 b0=[1,x_com];
 options = optimset('Display', 'off') ;
 [b2_res,J2_res,exitflag, output]=fmincon(func,b0,[],[],[],[],[],[],con,options);
-
+xcom_res=b2_res(2);
 
     function obj=objective(b2)
         obj=ss2_obj(b2, z1,z2, x_com);       
