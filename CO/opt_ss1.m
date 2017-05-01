@@ -3,7 +3,7 @@ function [J1_res,xcom_res]=opt_ss1(z1,z2, x_com)
 
 func=@objective;
 con=@constraint;
-b0=[1,x_com];
+b0=[1,1];
 options = optimset('Display', 'off') ;
 [b1_res,J1_res,exitflag, output]=fmincon(func,b0,[],[],[],[],[],[],con,options);
 xcom_res=b1_res(2);

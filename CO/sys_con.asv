@@ -7,7 +7,11 @@ x_com=z(3);
 [J1_res,xcom1_res]=opt_ss1(z1,z2, x_com);
 [J2_res,xcom2_res]=opt_ss2(z1,z2, x_com);
 
-J_ineq=[J1_res,J2_res, (xcom1_res-x_com)^2,(xcom2_res-x_com)^2];
-J_eq=0;
+%J1=(z1_res-z1).^2;
+%J2=(z2_res-z2).^2;
+
+J_ineq=[J1_res,J2_res, J_eq];%-[0.5,0.5]+
+
+J_eq=[xcom1_res-x_com,xcom2_res-x_com];
 
 end
