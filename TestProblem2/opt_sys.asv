@@ -1,0 +1,7 @@
+beta=1;
+
+x1_cop=1;
+x2_cop=1;
+
+[x1_res1,x2_res1,obj_res1]=opt_ss1(x1_cop,x2_cop, beta)
+[x1_res2,x2_res2]=opt_ss2(x1_cop,x2_cop, beta)
