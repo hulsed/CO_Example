@@ -15,7 +15,7 @@ x2=x_res(1);
 
     function [con,ceq]=constraint(x)
         
-        con=ss2_con(x(1),x1_cop,beta);
+        con=ss2_con(x(1),x1_cop,x2_cop,beta);
         ceq=[];
     end
 
