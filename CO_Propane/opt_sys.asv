@@ -1,0 +1,56 @@
+function [x_opt,f_opt]=opt_sys()
+
+R=10;
+P=40
+K5=1;
+K6=1;
+K7=1;
+K9=1;
+K8=0.1;
+K10=0.1;
+
+initpt=[1,1,1,1,1,1,1,1,1,1,1];
+
+objective=@sys_obj;
+constraint=@sys_con;
+
+options=optimoptions('fmincon','Display','iter','Algorithm','interior-point')
+%note: sqp and active-set approach do not seem to work as well farther from
+%the min. interior point still stalls out close to the min, perhaps due to
+%the inherent ill-conditioning of CO?
+
+[z,fval,exitflag,output]=fmincon(objective,initpt,[],[],[],[],[],[],constraint, options)
+
+
+    function [ineq,NA]=sys_con(z)
+        
+        f2=2*z(1)+z(2)+z(4)+z(7)+z(8)+z(9)+2*z(10)-R;
+        f6=K6*sqrt(z(2)*z(4))-sqrt(z(1))*z(6)*sqrt(P/z(11));
+        f7=K7*sqrt(z(1)*z(2))-sqrt(z(4))*z(7)*sqrt(P/z(11));
+        f9=K9*z(1)*sqrt(z(3))-z(4)*z(8)*sqrt(P/z(11));
+       
+        c_ineq(1)=-f2;
+        c_ineq(2)=-f6;
+        c_ineq(3)=-f7;
+        c_ineq(4)=-f9;
+        
+        J1=opt_ss1([],[])
+        J2=opt_ss2()
+        J3=opt_ss3()
+        
+       NA=[]; 
+    end
+    
+    function obj=sys_obj(z)
+        
+        f2=2*z(1)+z(2)+z(4)+z(7)+z(8)+z(9)+2*z(10)-R;
+        f6=K6*sqrt(z(2)*z(4))-sqrt(z(1))*z(6)*sqrt(P/z(11));
+        f7=K7*sqrt(z(1)*z(2))-sqrt(z(4))*z(7)*sqrt(P/z(11));
+        f9=K9*z(1)*sqrt(z(3))-z(4)*z(8)*sqrt(P/z(11));
+        
+        
+        obj=f2+f6+f7+f9;
+    end
+
+
+end

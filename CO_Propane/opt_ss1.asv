@@ -1,0 +1,21 @@
+function J1=opt_ss1(z)
+
+initpt=[1,1]
+
+
+    function obj=ss1_obj(x1)
+        x2=x(1);
+        x4=x(2);
+        
+        
+    end
+
+    function [ceq,cineq]=ss1_con(x1)
+        x2=x(1);
+        x4=x(2);
+        f1=z(1)+x4-
+        
+    end
+
+
+end
