@@ -4,8 +4,9 @@ K8=0.1;
 K10=0.1;
 P=40;
 initpt=[z(8),z(10)];
+LB=[0,0];
 options = optimset('Display', 'off') ;
-[xopt,J2,exitflag,output]=fmincon(@ss2_obj,initpt,[],[],[],[],[],[],@ss2_con,options);
+[xopt,J2,exitflag,output]=fmincon(@ss2_obj,initpt,[],[],[],[],LB,[],@ss2_con,options);
 
     function obj=ss2_obj(x)
         x8=x(1);

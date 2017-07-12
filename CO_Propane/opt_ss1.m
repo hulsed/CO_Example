@@ -3,7 +3,8 @@ function J1=opt_ss1(z)
 K5=1;
 initpt=[z(2),z(4)];
 options = optimset('Display', 'off') ;
-[xopt,J1,exitflag,output]=fmincon(@ss1_obj,initpt,[],[],[],[],[],[],@ss1_con,options);
+LB=[0,0];
+[xopt,J1,exitflag,output]=fmincon(@ss1_obj,initpt,[],[],[],[],LB,[],@ss1_con,options);
 
     function obj=ss1_obj(x)
         x2=x(1);

@@ -9,21 +9,24 @@ K9=1;
 K8=0.1;
 K10=0.1;
 
-initpt=[2,1,20,1,1,0,0,1,1,1,1];
+%initpt=[2,1,20,1,1,0,0,1,1,1,1];
+initpt=[2,1,20,1,1,0,0,1,5,1,30];
 
 objective=@sys_obj;
 constraint=@sys_con;
 
-options=optimoptions('fmincon','Display','iter','Algorithm','active-set','MaxFunEvals',1500);
+options=optimoptions('fmincon','Display','iter','Algorithm','interior-point','MaxFunEvals',1500);
 %note: sqp and active-set approach do not seem to work as well farther from
 %the min. interior point still stalls out close to the min, perhaps due to
 %the inherent ill-conditioning of CO?
 UB=[];
-LB=[0,0,0,0,0,0,0,0,0,0,0];
+LB=[0,0,0,0,0,0,0,0,0,0,0.001];
 LB=ones(1,11)*0.0001;
 
 [z_opt,f_opt,exitflag,output]=fmincon(objective,initpt,[],[],[],[],LB,[],constraint, options)
 
+%searchoptions=optimset('Display','iter','MaxIter',5000,'MaxFunEvals',10000)
+%[z_opt,f_opt,exitflag,output]=fminsearch(objective,initpt,searchoptions)
 
     function [ineq,eq]=sys_con(z)
         
@@ -55,6 +58,33 @@ LB=ones(1,11)*0.0001;
         
         
         obj=f2+f6+f7+f9;
+        
+%         [ineq,eq]=sys_con(z);
+%         
+%         for j=1:length(ineq)
+%            if ineq(j)>0
+%                in(j)=ineq(j);
+%            else
+%                in(j)=0;
+%            end
+%         end
+        
+%         for k=1:length(LB)
+%             if z(k)>0
+%                 bnd(k)=0;
+%             else
+%                 bnd(k)=z(k).^2;
+%             end
+%         end
+%         
+%         obj=obj1+1000*sum(in)+1000*sum(abs(eq))+1000*sum(bnd);
+        
+        %if isreal(obj)
+            
+        %else
+        %  pause  
+        %end
+        
     end
 
 

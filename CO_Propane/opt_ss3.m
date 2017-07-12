@@ -5,8 +5,9 @@ K10=0.1;
 P=40;
 R=10;
 initpt=[z(5),z(9),z(10)];
+LB=[0,0,0];
 options = optimset('Display', 'off') ;
-[xopt,J3,exitflag,output]=fmincon(@ss3_obj,initpt,[],[],[],[],[],[],@ss3_con,options);
+[xopt,J3,exitflag,output]=fmincon(@ss3_obj,initpt,[],[],[],[],LB,[],@ss3_con,options);
 
     function obj=ss3_obj(x)
         x5=x(1);
