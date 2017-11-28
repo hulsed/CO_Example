@@ -1,0 +1,14 @@
+function [J_ineq,J_eq]=sys_con(z)
+
+%constraints are evaluated as the ability of subsystem optimizers to meet
+%targets
+J1_res=opt_ss1(z);
+J2_res=opt_ss2(z);
+
+%system-level constraints are also considered"
+
+
+J_ineq=[J1_res,J2_res];
+J_eq=0;
+
+end

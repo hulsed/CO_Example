@@ -18,7 +18,6 @@ LB=[0,0,0,0,0,0,0,0,0,0,0.001];
 initpt=[2,1,20,1,1,0,0,1,1,1,1]
 options=optimoptions('fmincon','Display','iter', 'TolX', 1e-10,'Algorithm','sqp','MaxFunEvals',100000);
 
-%[z_opt,f_opt,exitflag,output]=ga(@sys_obj,length(initpt),[],[],[],[],LB,[],@sys_con);
 [z_opt,f_opt,exitflag,output]=fmincon(@sys_obj,initpt,[],[],[],[],LB,[],@sys_con, options);
 
     function obj=sys_obj(z)
@@ -54,12 +53,6 @@ options=optimoptions('fmincon','Display','iter', 'TolX', 1e-10,'Algorithm','sqp'
         ceq=[f1,f5,f8,f10,f3,f4,f11];
         
     end
-
-
-
-
-
-
 
 
 end
